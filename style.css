@@ -62,6 +62,7 @@ body {
   box-shadow: none;
   outline: none;
   font-size: 1em;
+  mix-blend-mode: difference;
 }
 
 .status {
