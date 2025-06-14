@@ -12,7 +12,7 @@ The official and (usually) complete list of Punctual's functions is at [REFERENC
 
 # Audio Output
 
-```
+```sql
 osc 440 >> audio; -- a 440 Hz sine-wave panned to the centre
 osc [440,550] >> audio; -- two sine-waves panned hard left and right
 osc [440,550,660,770] >> audio; -- four sine-waves spread over the panning space
@@ -21,7 +21,7 @@ osc 440; -- no audible output
 
 # Video Output
 
-```
+```sql
 [1,0,0] >> add; -- a very red screen
 [0,1,0] >> add; -- a very green screen
 [0,0,1] >> add; -- a very blue screen
@@ -35,7 +35,7 @@ Punctual video output is layered, like layers in image editing/compositing softw
 
 # Oscillators and Filters
 
-```
+```sql
 osc 440 >> audio; -- a 440 Hz sine wave
 tri 440 >> audio; -- a 440 Hz band-limited triangle wave
 sqr 440 >> audio; -- a 440 Hz band-limited square wave
@@ -55,7 +55,7 @@ the frequency of things in MIDI note numbers (where an increase of one is equiva
   to one musical semitone) and to express the amplitude of things in decibels (where
     an increase of six is roughly equivalent to doubling something).
 
-```
+```sql
 osc (midicps 57) >> audio; -- a 440 Hz sine wave / midi note 57 / "middle A"
 osc (midicps 57.1) >> audio; -- a slightly out of tune "middle A"
 osc (midicps 57) * dbamp (-10) >> audio; -- a quieter sine wave
@@ -71,7 +71,7 @@ crossfade between the old and new definitions. This default helps old and new th
 tend towards alignment in time, and avoids clicks and pops. Often, more control over
 this replacement process is desired:
 
-```
+```sql
 osc 440 >> audio <> 8; -- when changed and reevaluated, crossfades over 8 seconds
 ```
 
@@ -83,7 +83,7 @@ control the frequency of another, or to control the cutoff frequency of a filter
 Modulated ranges are a series of Punctual specific notations for this common
 mapping/scaling operation:
 
-```
+```sql
 saw (midicps $ 24 +- 0.03 $ osc 1) >> audio; -- go between 3% below MIDI note 24 and 3% above, driven by a 1 Hz sine wave
 lpf (100 ~~ 1000 $ osc 1) (saw $ midicps 24)  >> audio; -- filter frequency from 100 to 1000, driven by a 1 Hz sine wave
 saw (midicps $ 24 +- 0.03 $ osc 1 * sqr 2) >> audio; -- using a more complex "driver" for the modulation
